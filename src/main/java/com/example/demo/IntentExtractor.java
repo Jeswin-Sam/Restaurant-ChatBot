@@ -1,6 +1,5 @@
 package com.example.demo;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -61,7 +60,7 @@ public class IntentExtractor {
         }
     }
 
-    public static List<String> getFoodItems(String jsonInput) {
+    public static List<String> getFoodItemsList(String jsonInput) {
         // Parse the JSON string
         try {
             ObjectMapper mapper = new ObjectMapper();
@@ -79,6 +78,20 @@ public class IntentExtractor {
         catch (Exception e){
             System.out.println(e.getMessage());
             return new ArrayList<>();
+        }
+    }
+
+    public static String getFoodItem(String jsonInput) {
+        // Parse the JSON string
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode rootNode = mapper.readTree(jsonInput);
+            // Extract the "number"
+            return rootNode.path("queryResult").path("parameters").path("Food-item").asText();
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+            return null;
         }
     }
 }

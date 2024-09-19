@@ -1,20 +1,11 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.MenuItem;
-import com.example.demo.repository.MenuItemRepository;
 import com.example.demo.service.DialogFlowService;
-import com.example.demo.service.MenuItemService;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static com.example.demo.IntentExtractor.*;
 
@@ -28,9 +19,8 @@ public class DialogFlowController {
     public JSONObject processRequest(@RequestBody String jsonInput){
 
         String intent = getIntent(jsonInput);
-        Long orderId = getOrderId(jsonInput);
 
-        List<String> foodItems = getFoodItems(jsonInput);
+        List<String> foodItems = getFoodItemsList(jsonInput);
         List<Integer> numbers = getNumbers(jsonInput);
 
         JSONObject jsonObject = new JSONObject();
@@ -54,8 +44,13 @@ public class DialogFlowController {
                 return jsonObject;
             }
             case "Track order with order number": {
+                Long orderId = getOrderId(jsonInput);
                 jsonObject.put("fulfillmentText", dialogFlowService.getOrderStatusById(orderId));
                 return jsonObject;
+            }
+            case "Item Price Intent": {
+                String itemName = getFoodItem(jsonInput);
+                jsonObject.put("fulfillmentText", dialogFlowService.getPriceByName(itemName));
             }
         }
         return jsonObject;

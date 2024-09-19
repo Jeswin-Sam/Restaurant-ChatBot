@@ -187,4 +187,8 @@ public class DialogFlowService {
         return "Awesome! Your order is placed. Use the order id " + orderId + " to track your order";
     }
 
+    public String getPriceByName(String foodItem){
+        int itemPrice = menuItemRepository.findByName(foodItem).getPrice();
+        return "The price of " + foodItem + " is " + itemPrice;
+    }
 }
