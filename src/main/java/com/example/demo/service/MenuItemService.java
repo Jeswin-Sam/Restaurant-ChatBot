@@ -39,9 +39,4 @@ public class MenuItemService {
         }
     }
 
-    // find price by name
-    public int getPrice(String foodName){
-        return menuItemRepository.findByName(foodName).getPrice();
-    }
-
 }

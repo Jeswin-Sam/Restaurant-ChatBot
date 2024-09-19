@@ -44,9 +44,4 @@ public class MenuItemController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    // get price
-    @GetMapping("/menu/price/{name}")
-    public ResponseEntity<Integer> getPriceByName(@PathVariable String name){
-        return new ResponseEntity<>(menuItemService.getPrice(name),HttpStatus.OK);
-    }
 }
