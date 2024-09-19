@@ -24,7 +24,7 @@ public class DialogFlowController {
     @Autowired
     DialogFlowService dialogFlowService;
 
-    @PostMapping("/dialogflow")
+    @PostMapping("/")
     public JSONObject processRequest(@RequestBody String jsonInput){
 
         String intent = getIntent(jsonInput);

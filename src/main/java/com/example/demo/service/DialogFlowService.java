@@ -21,7 +21,7 @@ public class DialogFlowService {
     static Map<String, Integer> currentOrder = new HashMap<>();
 
     // track existing order
-    public String getOrderStatusById(Long id){
+    public String getOrderStatusById(Long id) {
         Optional<OrderBill> orderData = orderBillRepository.findById(id);
         if (orderData.isEmpty())
             return "Order number " + id + " not found. Please enter the correct order number";
@@ -40,24 +40,23 @@ public class DialogFlowService {
 
         if (currentOrder.size() == 1) {
             for (String foodItem : currentOrder.keySet()) {
-                outputString += currentOrder.get(foodItem) + " " + foodItem;
+                outputString += currentOrder.get(foodItem) + " " + foodItem + ".";
             }
-            outputString += "\nCurrent total is " + currentTotal();
-        }
-        else {
+            outputString += "\nCurrent total is " + currentTotal() + ".";
+        } else {
             List<String> foodItems = new ArrayList<>(currentOrder.keySet());
             for (int i = 0; i < foodItems.size() - 1; i++)
                 outputString += " " + currentOrder.get(foodItems.get(i)) + " " + foodItems.get(i) + ",";
 
-            outputString += " and " + currentOrder.get(foodItems.getLast()) + " " + foodItems.getLast();
-            outputString += "\nCurrent total is " + currentTotal();
+            outputString += " and " + currentOrder.get(foodItems.getLast()) + " " + foodItems.getLast() + ".";
+            outputString += "\nCurrent total is " + currentTotal() + ".";
 
         }
         return outputString;
     }
 
     // to get current total
-    public int currentTotal(){
+    public int currentTotal() {
 
         int currentTotal = 0;
 
@@ -74,7 +73,7 @@ public class DialogFlowService {
     public String addToOrder(List<String> foodItems, List<Integer> numbers) {
 
         if (foodItems.size() != numbers.size())
-            return "Please specify the food item and quantity properly";
+            return "Please specify the food item and quantity properly.";
 
         // add to current order
         for (int i = 0; i < foodItems.size(); i++) {
@@ -92,24 +91,30 @@ public class DialogFlowService {
         }
 
 
+        String outputString = "";
+
         // format the output string
-        if (foodItems.size() == 1)
-            return "Added " + numbers.getFirst() + " " + foodItems.getFirst();
-
-        String outputString = "Added";
-
-        for (int i = 0; i < foodItems.size()-1; i++) {
-
-            String foodItem = foodItems.get(i);
-            Integer number = numbers.get(i);
-
-            outputString += " " + number + " " + foodItem + ",";
+        if (foodItems.size() == 1) {
+            outputString += "Added " + numbers.getFirst() + " " + foodItems.getFirst() + ".";
         }
 
-        // final item
-        outputString += " and " + numbers.getLast() + " " + foodItems.getLast();
+        else {
+            outputString += "Added";
+
+            for (int i = 0; i < foodItems.size() - 1; i++) {
+
+                String foodItem = foodItems.get(i);
+                Integer number = numbers.get(i);
+
+                outputString += " " + number + " " + foodItem + ",";
+            }
+
+            // final item
+            outputString += " and " + numbers.getLast() + " " + foodItems.getLast() + ".";
+        }
 
         outputString += currentOrderText();
+        outputString += " Do you want to add anything else?";
         return outputString;
     }
 
@@ -129,6 +134,7 @@ public class DialogFlowService {
                 outputString += " " + foodItem;
             }
             outputString += currentOrderText();
+            outputString += " Do you want to add anything else?";
             return outputString;
         }
 
@@ -164,7 +170,7 @@ public class DialogFlowService {
             MenuItem menuItem = menuItemRepository.findByName(foodItemName);
 
             // Create OrderItem
-            OrderItem orderItem = new OrderItem(menuItem,quantity,orderBill);
+            OrderItem orderItem = new OrderItem(menuItem, quantity, orderBill);
             orderItems.add(orderItem);
         }
 

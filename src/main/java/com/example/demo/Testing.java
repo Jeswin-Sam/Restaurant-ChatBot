@@ -12,31 +12,14 @@ public class Testing {
 
     public static void main(String[] args) {
 
-//        DialogFlowService dialogFlowService = new DialogFlowService();
-//
-//        List<String> foodItems = List.of("Biryani");
-//        List<Integer> numbers = List.of(4);
-//
-//        System.out.println(dialogFlowService.addToOrder(foodItems,numbers));
-//
-//        List<String> foodItems2 = List.of("Biryani");
-//        List<Integer> numbers2 = List.of(1);
-//
-//        System.out.println(dialogFlowService.addToOrder(foodItems2,numbers2));
-//
-//        List<String> foodItems3 = List.of("Biryani");
-//        List<Integer> numbers3 = List.of(1);
-//
-//        System.out.println(dialogFlowService.removeFromOrder(foodItems3,numbers3));
-//
-//        System.out.println(dialogFlowService.finishOrder());
-
         String jsonInput = "{\n" +
-                "  \"responseId\": \"ddbe3f60-af23-49d5-b58b-83f1f42695ab-0fffcc35\",\n" +
+                "  \"responseId\": \"9ab256ee-2cf3-4e50-a076-b404e0cc5e8c-0fffcc35\",\n" +
                 "  \"queryResult\": {\n" +
-                "    \"queryText\": \"45\",\n" +
+                "    \"queryText\": \"three\",\n" +
                 "    \"parameters\": {\n" +
-                "      \"number\": 45\n" +
+                "      \"number\": [\n" +
+                "        3\n" +
+                "      ]\n" +
                 "    },\n" +
                 "    \"allRequiredParamsPresent\": true,\n" +
                 "    \"fulfillmentMessages\": [\n" +
@@ -53,8 +36,29 @@ public class Testing {
                 "        \"name\": \"projects/restaurant-chatbot-wcey/agent/sessions/29da999c-9756-373e-891e-4c7e69bc0eed/contexts/ongoing-tracking\",\n" +
                 "        \"lifespanCount\": 5,\n" +
                 "        \"parameters\": {\n" +
-                "          \"number\": 45,\n" +
-                "          \"number.original\": \"45\"\n" +
+                "          \"number\": [\n" +
+                "            3\n" +
+                "          ],\n" +
+                "          \"number.original\": [\n" +
+                "            \"three\"\n" +
+                "          ]\n" +
+                "        }\n" +
+                "      },\n" +
+                "      {\n" +
+                "        \"name\": \"projects/restaurant-chatbot-wcey/agent/sessions/29da999c-9756-373e-891e-4c7e69bc0eed/contexts/ongoing-order\",\n" +
+                "        \"parameters\": {\n" +
+                "          \"number\": [\n" +
+                "            3\n" +
+                "          ],\n" +
+                "          \"number.original\": [\n" +
+                "            \"three\"\n" +
+                "          ],\n" +
+                "          \"Food-item\": [\n" +
+                "            \"Biryani\"\n" +
+                "          ],\n" +
+                "          \"Food-item.original\": [\n" +
+                "            \"biryani\"\n" +
+                "          ]\n" +
                 "        }\n" +
                 "      },\n" +
                 "      {\n" +
@@ -62,8 +66,12 @@ public class Testing {
                 "        \"parameters\": {\n" +
                 "          \"no-input\": 0,\n" +
                 "          \"no-match\": 0,\n" +
-                "          \"number\": 45,\n" +
-                "          \"number.original\": \"45\"\n" +
+                "          \"number\": [\n" +
+                "            3\n" +
+                "          ],\n" +
+                "          \"number.original\": [\n" +
+                "            \"three\"\n" +
+                "          ]\n" +
                 "        }\n" +
                 "      }\n" +
                 "    ],\n" +
