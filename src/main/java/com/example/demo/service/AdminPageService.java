@@ -1,7 +1,9 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.MenuItem;
+import com.example.demo.entity.OrderBill;
 import com.example.demo.repository.MenuItemRepository;
+import com.example.demo.repository.OrderBillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,10 +11,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class MenuItemService {
+public class AdminPageService {
 
     @Autowired
     MenuItemRepository menuItemRepository;
+    @Autowired
+    OrderBillRepository orderBillRepository;
 
     // get all menu items
     public List<MenuItem> getAllItems(){
@@ -37,6 +41,16 @@ public class MenuItemService {
             existingItem.setName(menuItem.getName());
             existingItem.setPrice(menuItem.getPrice());
         }
+    }
+
+    // get pending orders
+    public List<OrderBill> getPendingOrders() {
+        return orderBillRepository.findByStatus("Pending");
+    }
+
+    // get completed orders
+    public List<OrderBill> getCompletedOrders() {
+        return orderBillRepository.findByStatus("Completed");
     }
 
 }

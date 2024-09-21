@@ -1,7 +1,8 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.MenuItem;
-import com.example.demo.service.MenuItemService;
+import com.example.demo.entity.OrderBill;
+import com.example.demo.service.AdminPageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,37 +12,49 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-public class MenuItemController {
+public class AdminPageController {
 
     @Autowired
-    MenuItemService menuItemService;
+    AdminPageService adminPageService;
 
     // get all menu items
     @GetMapping("/menu/items")
     public ResponseEntity<List<MenuItem>> getItems(){
-        List<MenuItem> items = menuItemService.getAllItems();
+        List<MenuItem> items = adminPageService.getAllItems();
         return new ResponseEntity<>(items, HttpStatus.OK);
     }
 
     // add new menu item
     @PostMapping("/menu/add")
     public ResponseEntity<MenuItem> addItem(@RequestBody MenuItem menuItem){
-        menuItemService.addMenuItem(menuItem);
+        adminPageService.addMenuItem(menuItem);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     // remove menu item
     @DeleteMapping("/menu/delete")
     public ResponseEntity<MenuItem> deleteMenuItem(@RequestBody MenuItem menuItem){
-        menuItemService.deleteMenuItem(menuItem);
+        adminPageService.deleteMenuItem(menuItem);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     // update menu item
     @PutMapping("/menu/update")
     public ResponseEntity<MenuItem> updateMenuItem(@RequestBody MenuItem menuItem){
-        menuItemService.updateMenuItem(menuItem);
+        adminPageService.updateMenuItem(menuItem);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    // get pending orders
+    @GetMapping("/orders/pending")
+    public ResponseEntity<List<OrderBill>> getPendingOrders(){
+        return new ResponseEntity<>(adminPageService.getPendingOrders(), HttpStatus.OK);
+    }
+
+//    // get completed orders
+//    @GetMapping("/orders/completed")
+//    public ResponseEntity<List<OrderBill>> getCompletedOrders(){
+//        return new ResponseEntity<>(adminPageService.getCompletedOrders(), HttpStatus.OK);
+//    }
 
 }
