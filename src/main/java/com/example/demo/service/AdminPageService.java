@@ -4,6 +4,7 @@ import com.example.demo.entity.MenuItem;
 import com.example.demo.entity.OrderBill;
 import com.example.demo.repository.MenuItemRepository;
 import com.example.demo.repository.OrderBillRepository;
+import org.hibernate.query.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,6 +52,11 @@ public class AdminPageService {
     // get completed orders
     public List<OrderBill> getCompletedOrders() {
         return orderBillRepository.findByStatus("Completed");
+    }
+
+    // get order by id
+    public OrderBill getOrderById(Long id) {
+        return orderBillRepository.findById(id).orElse(null);
     }
 
 }

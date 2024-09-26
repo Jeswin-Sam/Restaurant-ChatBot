@@ -51,10 +51,16 @@ public class AdminPageController {
         return new ResponseEntity<>(adminPageService.getPendingOrders(), HttpStatus.OK);
     }
 
-//    // get completed orders
-//    @GetMapping("/orders/completed")
-//    public ResponseEntity<List<OrderBill>> getCompletedOrders(){
-//        return new ResponseEntity<>(adminPageService.getCompletedOrders(), HttpStatus.OK);
-//    }
+    // get completed orders
+    @GetMapping("/orders/completed")
+    public ResponseEntity<List<OrderBill>> getCompletedOrders(){
+        return new ResponseEntity<>(adminPageService.getCompletedOrders(), HttpStatus.OK);
+    }
+
+    // get order by id
+    @GetMapping("/orders/{id}")
+    public ResponseEntity<OrderBill> getBillById(@PathVariable Long id) {
+        return new ResponseEntity<>(adminPageService.getOrderById(id), HttpStatus.OK);
+    }
 
 }
