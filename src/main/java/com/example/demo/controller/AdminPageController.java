@@ -32,9 +32,9 @@ public class AdminPageController {
     }
 
     // remove menu item
-    @DeleteMapping("/menu/delete")
-    public ResponseEntity<MenuItem> deleteMenuItem(@RequestBody MenuItem menuItem){
-        adminPageService.deleteMenuItem(menuItem);
+    @DeleteMapping("/menu/delete/{id}")
+    public ResponseEntity<MenuItem> deleteMenuItemById(@PathVariable Long id){
+        adminPageService.deleteMenuItemById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

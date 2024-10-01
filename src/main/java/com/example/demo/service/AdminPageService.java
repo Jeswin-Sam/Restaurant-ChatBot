@@ -30,8 +30,8 @@ public class AdminPageService {
     }
 
     // delete menu item
-    public void deleteMenuItem(MenuItem menuItem){
-        menuItemRepository.delete(menuItem);
+    public void deleteMenuItemById(Long id){
+        menuItemRepository.deleteById(id);
     }
 
     // update menu item
