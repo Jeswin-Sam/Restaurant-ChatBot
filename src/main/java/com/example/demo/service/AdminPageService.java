@@ -35,7 +35,7 @@ public class AdminPageService {
 
     // update menu item
     public void updateMenuItem(MenuItem menuItem) {
-        Optional<MenuItem> existingItemData = menuItemRepository.findById(menuItem.getId());
+        Optional<MenuItem> existingItemData = menuItemRepository.findById(menuItem.getItemId());
         if (existingItemData.isPresent()) {
             MenuItem existingItem = existingItemData.get();
 

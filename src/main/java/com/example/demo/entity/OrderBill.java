@@ -1,6 +1,6 @@
 package com.example.demo.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,9 +16,10 @@ import java.util.List;
 public class OrderBill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long orderId;
 
     @OneToMany(mappedBy = "orderBill", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<OrderItem> items;
 
     private String status;

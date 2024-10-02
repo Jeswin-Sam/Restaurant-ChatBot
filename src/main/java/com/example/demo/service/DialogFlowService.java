@@ -180,7 +180,7 @@ public class DialogFlowService {
 
         // save the bill in the database
         OrderBill savedOrderBill = orderBillRepository.save(orderBill);
-        Long orderId = savedOrderBill.getId();
+        Long orderId = savedOrderBill.getOrderId();
 
         // clear the current order
         currentOrder.clear();
