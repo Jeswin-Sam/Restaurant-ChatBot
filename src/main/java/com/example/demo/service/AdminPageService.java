@@ -4,7 +4,6 @@ import com.example.demo.entity.MenuItem;
 import com.example.demo.entity.OrderBill;
 import com.example.demo.repository.MenuItemRepository;
 import com.example.demo.repository.OrderBillRepository;
-import org.hibernate.query.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,8 +38,11 @@ public class AdminPageService {
         Optional<MenuItem> existingItemData = menuItemRepository.findById(menuItem.getId());
         if (existingItemData.isPresent()) {
             MenuItem existingItem = existingItemData.get();
+
             existingItem.setName(menuItem.getName());
             existingItem.setPrice(menuItem.getPrice());
+
+            menuItemRepository.save(existingItem);
         }
     }
 
