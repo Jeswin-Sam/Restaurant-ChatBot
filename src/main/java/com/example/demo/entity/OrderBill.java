@@ -25,5 +25,6 @@ public class OrderBill {
     private String status;
     private Date orderDate;
     private int totalAmount;
+
 }
 

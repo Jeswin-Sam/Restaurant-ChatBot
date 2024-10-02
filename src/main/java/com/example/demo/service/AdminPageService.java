@@ -1,7 +1,9 @@
 package com.example.demo.service;
 
+import com.example.demo.entity.ItemDTO;
 import com.example.demo.entity.MenuItem;
 import com.example.demo.entity.OrderBill;
+import com.example.demo.entity.OrderResponseDTO;
 import com.example.demo.repository.MenuItemRepository;
 import com.example.demo.repository.OrderBillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class AdminPageService {
@@ -46,15 +49,33 @@ public class AdminPageService {
         }
     }
 
-    // get pending orders
-    public List<OrderBill> getPendingOrders() {
-        return orderBillRepository.findByStatus("Pending");
+//    // get pending orders
+//    public List<OrderBill> getPendingOrders() {
+//        return orderBillRepository.findByStatus("Pending");
+//    }
+
+    public List<OrderResponseDTO> getOrdersByStatus(String status) {
+        List<OrderBill> orders = orderBillRepository.findByStatus(status);
+
+        return orders.stream().map(order -> {
+            List<ItemDTO> items = order.getItems().stream()
+                    .map(orderItem -> new ItemDTO(orderItem.getMenuItem().getName(), orderItem.getQuantity()))
+                    .collect(Collectors.toList());
+
+            return new OrderResponseDTO(
+                    order.getOrderId(),
+                    items,
+                    order.getStatus(),
+                    order.getOrderDate(),
+                    order.getTotalAmount()
+            );
+        }).collect(Collectors.toList());
     }
 
-    // get completed orders
-    public List<OrderBill> getCompletedOrders() {
-        return orderBillRepository.findByStatus("Completed");
-    }
+//    // get completed orders
+//    public List<OrderBill> getCompletedOrders() {
+//        return orderBillRepository.findByStatus("Completed");
+//    }
 
     // get order by id
     public OrderBill getOrderById(Long id) {

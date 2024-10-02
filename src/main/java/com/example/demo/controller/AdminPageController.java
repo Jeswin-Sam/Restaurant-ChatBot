@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.MenuItem;
 import com.example.demo.entity.OrderBill;
+import com.example.demo.entity.OrderResponseDTO;
 import com.example.demo.service.AdminPageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -48,14 +49,14 @@ public class AdminPageController {
 
     // get pending orders
     @GetMapping("/orders/pending")
-    public ResponseEntity<List<OrderBill>> getPendingOrders(){
-        return new ResponseEntity<>(adminPageService.getPendingOrders(), HttpStatus.OK);
+    public ResponseEntity<List<OrderResponseDTO>> getPendingOrders(){
+        return new ResponseEntity<>(adminPageService.getOrdersByStatus("Pending"), HttpStatus.OK);
     }
 
     // get completed orders
     @GetMapping("/orders/completed")
-    public ResponseEntity<List<OrderBill>> getCompletedOrders(){
-        return new ResponseEntity<>(adminPageService.getCompletedOrders(), HttpStatus.OK);
+    public ResponseEntity<List<OrderResponseDTO>> getCompletedOrders(){
+        return new ResponseEntity<>(adminPageService.getOrdersByStatus("Completed"), HttpStatus.OK);
     }
 
     // get order by id
