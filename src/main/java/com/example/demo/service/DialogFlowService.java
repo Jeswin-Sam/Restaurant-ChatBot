@@ -55,7 +55,7 @@ public class DialogFlowService {
     // to handle new order
     public String newOrder() {
         currentOrder.clear();
-        return displayMenu();
+        return "Starting new order. " + displayMenu();
     }
 
     // to display current order

@@ -31,6 +31,10 @@ public class DialogFlowController {
                 jsonObject.put("fulfillmentText", dialogFlowService.newOrder());
                 return jsonObject;
             }
+            case "Display Menu Intent": {
+                jsonObject.put("fulfillmentText", dialogFlowService.displayMenu());
+                return jsonObject;
+            }
             case "Add to order Intent": {
                 jsonObject.put("fulfillmentText", dialogFlowService.addToOrder(foodItems, numbers));
                 return jsonObject;
