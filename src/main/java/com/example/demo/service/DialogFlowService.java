@@ -99,13 +99,18 @@ public class DialogFlowService {
         if (foodItems.size() != numbers.size())
             return "Please specify the food item and quantity properly.";
 
+        // get all the menu items
+        List<String> itemList = getItemNames();
+        for (int i = 0; i < itemList.size(); i++)
+            itemList.set(i,itemList.get(i).toLowerCase());
+
         // add to current order
         for (int i = 0; i < foodItems.size(); i++) {
             String foodItem = foodItems.get(i);
             Integer number = numbers.get(i);
 
             // if food item is not in the database
-            if (!getItemNames().contains(foodItem)) {
+            if (!itemList.contains(foodItem.toLowerCase())) {
                 // capitalize the first letter of the food item
                 foodItem = foodItem.substring(0, 1).toUpperCase() + foodItem.substring(1);
                 return foodItem + " is not available. Please order something from the menu. " + displayMenu();
