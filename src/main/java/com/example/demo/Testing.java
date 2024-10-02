@@ -1,48 +1,45 @@
 package com.example.demo;
 
 import com.example.demo.service.DialogFlowService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
-
-import static com.example.demo.IntentExtractor.*;
 
 public class Testing {
 
     public static void main(String[] args) {
 
+        DialogFlowService dialogFlowService = new DialogFlowService();
+
         String jsonInput = "{\n" +
-                "  \"responseId\": \"5cbf4dbd-f67a-450d-aab4-fd17cf10e487-0fffcc35\",\n" +
+                "  \"responseId\": \"52df9d9e-a58d-4e6f-a289-0af2bb740139-d673503e\",\n" +
                 "  \"queryResult\": {\n" +
-                "    \"queryText\": \"what is the price of burger\",\n" +
-                "    \"parameters\": {\n" +
-                "      \"Food-item\": \"Burger\"\n" +
-                "    },\n" +
+                "    \"queryText\": \"new order\",\n" +
+                "    \"parameters\": {},\n" +
                 "    \"allRequiredParamsPresent\": true,\n" +
+                "    \"fulfillmentText\": \"asdfg\",\n" +
                 "    \"fulfillmentMessages\": [\n" +
                 "      {\n" +
                 "        \"text\": {\n" +
                 "          \"text\": [\n" +
-                "            \"\"\n" +
+                "            \"asdfg\"\n" +
                 "          ]\n" +
                 "        }\n" +
                 "      }\n" +
                 "    ],\n" +
                 "    \"outputContexts\": [\n" +
                 "      {\n" +
-                "        \"name\": \"projects/restaurant-chatbot-wcey/agent/sessions/29da999c-9756-373e-891e-4c7e69bc0eed/contexts/__system_counters__\",\n" +
+                "        \"name\": \"projects/restaurant-chatbot-wcey/agent/sessions/1a45751c-bf55-88ba-f204-f1183bcf6804/contexts/ongoing-order\",\n" +
+                "        \"lifespanCount\": 5\n" +
+                "      },\n" +
+                "      {\n" +
+                "        \"name\": \"projects/restaurant-chatbot-wcey/agent/sessions/1a45751c-bf55-88ba-f204-f1183bcf6804/contexts/__system_counters__\",\n" +
                 "        \"parameters\": {\n" +
                 "          \"no-input\": 0,\n" +
-                "          \"no-match\": 0,\n" +
-                "          \"Food-item\": \"Burger\",\n" +
-                "          \"Food-item.original\": \"burger\"\n" +
+                "          \"no-match\": 0\n" +
                 "        }\n" +
                 "      }\n" +
                 "    ],\n" +
                 "    \"intent\": {\n" +
-                "      \"name\": \"projects/restaurant-chatbot-wcey/agent/intents/8bc6f849-1ed8-4320-835e-e9076064eabe\",\n" +
-                "      \"displayName\": \"Item Price Intent\"\n" +
+                "      \"name\": \"projects/restaurant-chatbot-wcey/agent/intents/12e207b9-7d8e-4c1f-a3e4-f9e68b629790\",\n" +
+                "      \"displayName\": \"New Order Intent\"\n" +
                 "    },\n" +
                 "    \"intentDetectionConfidence\": 1,\n" +
                 "    \"languageCode\": \"en\"\n" +
@@ -51,10 +48,10 @@ public class Testing {
                 "    \"source\": \"DIALOGFLOW_CONSOLE\",\n" +
                 "    \"payload\": {}\n" +
                 "  },\n" +
-                "  \"session\": \"projects/restaurant-chatbot-wcey/agent/sessions/29da999c-9756-373e-891e-4c7e69bc0eed\"\n" +
+                "  \"session\": \"projects/restaurant-chatbot-wcey/agent/sessions/1a45751c-bf55-88ba-f204-f1183bcf6804\"\n" +
                 "}";
 
-        System.out.println(getFoodItem(jsonInput));
+        System.out.println(dialogFlowService.newOrder());
 
     }
 }

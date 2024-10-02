@@ -20,6 +20,29 @@ public class DialogFlowService {
 
     static Map<String, Integer> currentOrder = new HashMap<>();
 
+    // get the item names from the database
+    public List<String> getItemNames() {
+
+        List<MenuItem> menuItems = menuItemRepository.findAll();
+        List<String> itemNames = new ArrayList<>();
+
+        for (MenuItem menuItem : menuItems)
+            itemNames.add(menuItem.getName());
+
+        return itemNames;
+    }
+
+    // display the menu
+    public String displayMenu() {
+        String outputString = "Here is the menu. ";
+        List<String> items = getItemNames();
+        outputString += items.getFirst();
+        for (int i = 1; i < items.size(); i++) {
+            outputString += ", " + items.get(i);
+        }
+        return outputString;
+    }
+
     // track existing order
     public String getOrderStatusById(Long id) {
         Optional<OrderBill> orderData = orderBillRepository.findById(id);
@@ -30,8 +53,9 @@ public class DialogFlowService {
     }
 
     // to handle new order
-    public void newOrder() {
+    public String newOrder() {
         currentOrder.clear();
+        return displayMenu();
     }
 
     // to display current order
@@ -80,6 +104,12 @@ public class DialogFlowService {
             String foodItem = foodItems.get(i);
             Integer number = numbers.get(i);
 
+            // if food item is not in the database
+            if (!getItemNames().contains(foodItem)) {
+                // capitalize the first letter of the food item
+                foodItem = foodItem.substring(0, 1).toUpperCase() + foodItem.substring(1);
+                return foodItem + " is not available. Please order something from the menu. " + displayMenu();
+            }
             // if food item is already present
             if (currentOrder.containsKey(foodItem)) {
                 Integer updatedNumber = currentOrder.get(foodItem) + number;

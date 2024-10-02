@@ -28,7 +28,7 @@ public class DialogFlowController {
         switch (intent) {
 
             case "New Order Intent": {
-                dialogFlowService.newOrder();
+                jsonObject.put("fulfillmentText", dialogFlowService.newOrder());
                 return jsonObject;
             }
             case "Add to order Intent": {
