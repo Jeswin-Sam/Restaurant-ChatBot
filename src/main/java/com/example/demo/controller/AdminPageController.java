@@ -52,16 +52,10 @@ public class AdminPageController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    // get pending orders
-    @GetMapping("/orders/pending")
-    public ResponseEntity<List<OrderResponseDTO>> getPendingOrders(){
-        return new ResponseEntity<>(adminPageService.getOrdersByStatus("Pending"), HttpStatus.OK);
-    }
-
-    // get completed orders
-    @GetMapping("/orders/completed")
-    public ResponseEntity<List<OrderResponseDTO>> getCompletedOrders(){
-        return new ResponseEntity<>(adminPageService.getOrdersByStatus("Completed"), HttpStatus.OK);
+    // get order status
+    @GetMapping("/orders")
+    public ResponseEntity<List<OrderResponseDTO>> getOrderStatus(@RequestParam String status) {
+        return new ResponseEntity<>(adminPageService.getOrdersByStatus(status), HttpStatus.OK);
     }
 
     // get order by id
