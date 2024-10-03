@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.entity.MenuItem;
 import com.example.demo.entity.OrderBill;
 import com.example.demo.entity.OrderResponseDTO;
+import com.example.demo.repository.OrderBillRepository;
 import com.example.demo.service.AdminPageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @CrossOrigin(origins = "*")
 @Controller
@@ -18,6 +21,8 @@ public class AdminPageController {
 
     @Autowired
     AdminPageService adminPageService;
+    @Autowired
+    OrderBillRepository orderBillRepository;
 
     // get all menu items
     @GetMapping("/menu/items")
@@ -65,4 +70,20 @@ public class AdminPageController {
         return new ResponseEntity<>(adminPageService.getOrderById(id), HttpStatus.OK);
     }
 
+    // Update order status
+    @PutMapping("/orders/updateStatus/{orderId}")
+    public ResponseEntity<String> updateOrderStatus(
+            @PathVariable Long orderId,
+            @RequestBody Map<String, String> payload) {
+        String status = payload.get("status");
+        Optional<OrderBill> orderOptional = orderBillRepository.findById(orderId);
+        if (orderOptional.isPresent()) {
+            OrderBill order = orderOptional.get();
+            order.setStatus(status);
+            orderBillRepository.save(order);
+            return ResponseEntity.ok("Order status updated to " + status);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Order not found");
+        }
+    }
 }
