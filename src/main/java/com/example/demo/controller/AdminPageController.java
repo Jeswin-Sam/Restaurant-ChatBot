@@ -68,8 +68,7 @@ public class AdminPageController {
     @PutMapping("/orders/updateStatus/{orderId}")
     public ResponseEntity<String> updateOrderStatus(
             @PathVariable Long orderId,
-            @RequestBody Map<String, String> payload) {
-        String status = payload.get("status");
+            @RequestParam String status) {
         Optional<OrderBill> orderOptional = orderBillRepository.findById(orderId);
         if (orderOptional.isPresent()) {
             OrderBill order = orderOptional.get();

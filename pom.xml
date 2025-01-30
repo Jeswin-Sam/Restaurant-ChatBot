@@ -11,8 +11,8 @@
 	<groupId>com.example</groupId>
 	<artifactId>demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>demo</name>
-	<description>Demo project for Spring Boot</description>
+	<name>Chat-Server</name>
+	<description>Chat Server for Restaurant ChatBot</description>
 	<url/>
 	<licenses>
 		<license/>
