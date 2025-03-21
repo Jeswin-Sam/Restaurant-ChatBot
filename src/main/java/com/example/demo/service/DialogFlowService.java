@@ -35,8 +35,10 @@ public class DialogFlowService {
     // display the menu
     public String displayMenu() {
         String outputString = "Here is the menu. ";
+
         List<String> items = getItemNames();
         outputString += items.getFirst();
+
         for (int i = 1; i < items.size(); i++) {
             outputString += ", " + items.get(i);
         }
@@ -60,22 +62,27 @@ public class DialogFlowService {
 
     // to display current order
     public String currentOrderText() {
+
+        if (currentOrder.isEmpty())
+            return "";
+
         String outputString = "\nYour current order contains ";
 
         if (currentOrder.size() == 1) {
-            for (String foodItem : currentOrder.keySet()) {
+            for (String foodItem : currentOrder.keySet())
                 outputString += currentOrder.get(foodItem) + " " + foodItem + ".";
-            }
-            outputString += "\nCurrent total is " + currentTotal() + ".";
-        } else {
+        }
+
+        else {
             List<String> foodItems = new ArrayList<>(currentOrder.keySet());
             for (int i = 0; i < foodItems.size() - 1; i++)
                 outputString += " " + currentOrder.get(foodItems.get(i)) + " " + foodItems.get(i) + ",";
 
             outputString += " and " + currentOrder.get(foodItems.getLast()) + " " + foodItems.getLast() + ".";
-            outputString += "\nCurrent total is " + currentTotal() + ".";
-
         }
+
+        outputString += "\nCurrent total is " + currentTotal() + ".";
+        outputString += " Do you want to add anything else?";
         return outputString;
     }
 
@@ -149,7 +156,6 @@ public class DialogFlowService {
         }
 
         outputString += currentOrderText();
-        outputString += " Do you want to add anything else?";
         return outputString;
     }
 
@@ -169,7 +175,6 @@ public class DialogFlowService {
                 outputString += " " + foodItem;
             }
             outputString += currentOrderText();
-            outputString += " Do you want to add anything else?";
             return outputString;
         }
 
@@ -224,6 +229,8 @@ public class DialogFlowService {
 
     public String getPriceByName(String foodItem){
         int itemPrice = menuItemRepository.findByName(foodItem).getPrice();
-        return "The price of " + foodItem + " is " + itemPrice;
+        String outputString = "The price of " + foodItem + " is " + itemPrice;
+        outputString += currentOrderText();
+        return outputString;
     }
 }
