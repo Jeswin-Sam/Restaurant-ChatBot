@@ -16,8 +16,6 @@ public class OrderResponseDTO {
     private String status;
     private Date orderDate;
     private double totalAmount;
-
-    // Constructors, Getters, and Setters
 }
 
 

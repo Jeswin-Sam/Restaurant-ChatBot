@@ -24,6 +24,7 @@ public class OrderItem {
 
     @ManyToOne
     @JoinColumn(name = "menu_item_id")
+    @JsonBackReference(value = "menu-order")
     private MenuItem menuItem;
 
     private int quantity;

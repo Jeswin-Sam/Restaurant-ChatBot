@@ -49,11 +49,6 @@ public class AdminPageService {
         }
     }
 
-//    // get pending orders
-//    public List<OrderBill> getPendingOrders() {
-//        return orderBillRepository.findByStatus("Pending");
-//    }
-
     public List<OrderResponseDTO> getOrdersByStatus(String status) {
         List<OrderBill> orders = orderBillRepository.findByStatus(status);
 
@@ -71,11 +66,6 @@ public class AdminPageService {
             );
         }).collect(Collectors.toList());
     }
-
-//    // get completed orders
-//    public List<OrderBill> getCompletedOrders() {
-//        return orderBillRepository.findByStatus("Completed");
-//    }
 
     // get order by id
     public OrderBill getOrderById(Long id) {

@@ -224,9 +224,10 @@ public class DialogFlowService {
 
         // clear the current order
         currentOrder.clear();
-        return "Awesome! Your order is placed. Use the order id " + orderId + " to track your order";
+        return "Awesome! Your order is placed. Use the order ID " + orderId + " to track your order";
     }
 
+    // get the item price
     public String getPriceByName(String foodItem){
         int itemPrice = menuItemRepository.findByName(foodItem).getPrice();
         String outputString = "The price of " + foodItem + " is " + itemPrice;
