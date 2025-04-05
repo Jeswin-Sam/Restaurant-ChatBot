@@ -1,10 +1,10 @@
-package com.example.demo.controller;
+package com.example.chat_server.controller;
 
-import com.example.demo.entity.MenuItem;
-import com.example.demo.entity.OrderBill;
-import com.example.demo.entity.OrderResponseDTO;
-import com.example.demo.repository.OrderBillRepository;
-import com.example.demo.service.AdminPageService;
+import com.example.chat_server.entity.MenuItem;
+import com.example.chat_server.entity.OrderBill;
+import com.example.chat_server.entity.OrderResponseDTO;
+import com.example.chat_server.repository.OrderBillRepository;
+import com.example.chat_server.service.AdminPageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @CrossOrigin(origins = "*")

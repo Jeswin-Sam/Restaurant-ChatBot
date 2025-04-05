@@ -1,6 +1,6 @@
-package com.example.demo;
+package com.example.chat_server;
 
-import com.example.demo.service.DialogFlowService;
+import com.example.chat_server.service.DialogFlowService;
 
 public class Testing {
 

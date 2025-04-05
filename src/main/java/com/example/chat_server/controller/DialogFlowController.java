@@ -1,13 +1,13 @@
-package com.example.demo.controller;
+package com.example.chat_server.controller;
 
-import com.example.demo.service.DialogFlowService;
+import com.example.chat_server.service.DialogFlowService;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.example.demo.IntentExtractor.*;
+import static com.example.chat_server.IntentExtractor.*;
 
 @RestController
 public class DialogFlowController {

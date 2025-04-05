@@ -1,10 +1,10 @@
-package com.example.demo.service;
+package com.example.chat_server.service;
 
-import com.example.demo.entity.MenuItem;
-import com.example.demo.entity.OrderBill;
-import com.example.demo.entity.OrderItem;
-import com.example.demo.repository.MenuItemRepository;
-import com.example.demo.repository.OrderBillRepository;
+import com.example.chat_server.entity.MenuItem;
+import com.example.chat_server.entity.OrderBill;
+import com.example.chat_server.entity.OrderItem;
+import com.example.chat_server.repository.MenuItemRepository;
+import com.example.chat_server.repository.OrderBillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

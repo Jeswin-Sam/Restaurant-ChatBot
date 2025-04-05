@@ -1,7 +1,6 @@
-package com.example.demo.repository;
+package com.example.chat_server.repository;
 
-import com.example.demo.entity.MenuItem;
-import com.example.demo.entity.OrderBill;
+import com.example.chat_server.entity.OrderBill;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
